@@ -1,0 +1,10 @@
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\MiProyectoMVC.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\MiProyectoMVC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\MiProyectoMVC.AssemblyInfoInputs.cache
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\MiProyectoMVC.AssemblyInfo.cs
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\MiProyectoMVC.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\MiProyectoMVC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\MiProyectoMVC.RazorAssemblyInfo.cache
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\MiProyectoMVC.RazorAssemblyInfo.cs
+C:\Users\ADMIN\Documents\MiProyectoMVC\obj\Debug\net10.0\MiProyectoMVC.sourcelink.json
