@@ -1,0 +1,105 @@
+@model IEnumerable<MiProyectoMVC.Models.Events.Event>
+
+@{
+ViewData["Title"] = "Eventos";
+}
+
+<!-- HERO -->
+<div class="section hero">
+    <div class="container center-align">
+        <h3>🎟️ Descubre Eventos</h3>
+        <p class="grey-text">Encuentra conciertos, anime, tech y más</p>
+
+        <!-- Buscador -->
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3">
+                <input type="text" id="search" onkeyup="filterEvents()">
+                <label>Buscar evento...</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- GRID -->
+<div class="container">
+    <div class="row" id="eventContainer">
+
+        @foreach (var item in Model)
+        {
+        <div class="col s12 m6 l4 event-card" data-name="@item.Nombre">
+
+            <div class="card event-card-style">
+
+                <!-- Imagen -->
+                <div class="card-image">
+                    <img src="@(string.IsNullOrEmpty(item.ImagenUrl) ? "/images/default.jpg" : item.ImagenUrl)">
+                    <span class="card-title">@item.Nombre</span>
+                </div>
+
+                <!-- Info -->
+                <div class="card-content">
+                    <p>📅 @item.Fecha.ToShortDateString()</p>
+                    <p>📍 @item.Ubicacion</p>
+                </div>
+
+                <!-- Botón -->
+                <div class="card-action center-align">
+                    <a class="btn gradient-btn">Ver más</a>
+                </div>
+
+            </div>
+
+        </div>
+        }
+
+    </div>
+</div>
+
+<style>
+    /* HERO */
+    .hero {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        padding: 40px 0;
+        border-radius: 0 0 30px 30px;
+    }
+
+    /* CARDS */
+    .event-card-style {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .event-card-style:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    }
+
+    /* IMAGEN */
+    .card-image img {
+        height: 220px;
+        object-fit: cover;
+    }
+
+    /* BOTÓN */
+    .gradient-btn {
+        background: linear-gradient(45deg, #00c6ff, #0072ff);
+        border-radius: 20px;
+    }
+</style>
+
+@section Scripts {
+<script>
+    function filterEvents() {
+        let input = document.getElementById("search").value.toLowerCase();
+        let cards = document.getElementsByClassName("event-card");
+
+        for (let i = 0; i < cards.length; i++) {
+            let name = cards[i].getAttribute("data-name").toLowerCase();
+
+            cards[i].style.display = name.includes(input) ? "block" : "none";
+        }
+}
+</script>
+}

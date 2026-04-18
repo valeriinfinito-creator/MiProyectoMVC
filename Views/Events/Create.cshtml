@@ -1,0 +1,77 @@
+@model MiProyectoMVC.Models.Events.Event
+
+<div class="container">
+    <div class="card z-depth-4 form-card">
+        <div class="card-content">
+
+            <span class="card-title center-align">➕ Crear Evento</span>
+
+            <form asp-action="Create" method="post">
+
+                <div class="row">
+
+                    <div class="input-field col s12">
+                        <input asp-for="Nombre" id="Nombre" type="text">
+                        <label for="Nombre">Nombre</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <input asp-for="Fecha" type="date">
+                        <label>Fecha</label>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <input asp-for="Ubicacion">
+                        <label>Ubicación</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="ImagenUrl" id="imgInput" oninput="preview()">
+                        <label>Imagen URL</label>
+                    </div>
+
+                    <div class="col s12 center-align">
+                        <img id="previewImg" src="/images/default.jpg" class="preview-img">
+                    </div>
+
+                    <div class="input-field col s12">
+                        <textarea asp-for="Descripcion" class="materialize-textarea"></textarea>
+                        <label>Descripción</label>
+                    </div>
+
+                </div>
+
+                <div class="center-align">
+                    <button class="btn gradient-btn">Crear</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-card {
+        border-radius: 15px;
+        padding: 10px;
+    }
+
+    .preview-img {
+        max-height: 200px;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    .gradient-btn {
+        background: linear-gradient(45deg, #00c6ff, #0072ff);
+        border-radius: 20px;
+    }
+</style>
+
+<script>
+    function preview() {
+        document.getElementById("previewImg").src =
+            document.getElementById("imgInput").value;
+    }
+</script>

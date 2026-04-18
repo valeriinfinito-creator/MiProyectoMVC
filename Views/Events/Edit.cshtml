@@ -1,0 +1,156 @@
+@model MiProyectoMVC.Models.Events.Event
+
+@{
+ViewData["Title"] = "Editar Evento";
+}
+
+<div class="container">
+    
+    <div class="section">
+        <h4 class="center-align">✏️ Editar Evento</h4>
+        <p class="center-align grey-text">Actualiza la información y guarda los cambios</p>
+    </div>
+
+    <div class="row">
+        
+        <div class="col s12 m7">
+            <div class="card z-depth-4 hoverable">
+                <div class="card-content">
+
+                    <form asp-action="Edit" method="post">
+                        
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row">
+                            
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">event</i>
+                                <input asp-for="Nombre" id="Nombre" type="text" required>
+                                <label class="active" for="Nombre">Nombre del evento</label>
+                            </div>
+                            
+                            <div class="input-field col s12 m6">
+                                <i class="material-icons prefix">date_range</i>
+                                <input asp-for="Fecha" type="date" required>
+                                <label class="active">Fecha</label>
+                            </div>
+                            
+                            <div class="input-field col s12 m6">
+                                <i class="material-icons prefix">location_on</i>
+                                <input asp-for="Ubicacion" type="text" required>
+                                <label class="active">Ubicación</label>
+                            </div>
+                           
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">image</i>
+                                <input asp-for="ImagenUrl" id="ImagenUrl" type="text" oninput="previewImage()">
+                                <label class="active">URL de imagen</label>
+                            </div>
+                            
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">description</i>
+                                <textarea asp-for="Descripcion" id="Descripcion" class="materialize-textarea"></textarea>
+                                <label class="active">Descripción</label>
+                            </div>
+                            
+                            <div class="col s12">
+                                <div class="switch center-align" style="margin-top:15px;">
+                                    <label>
+                                        Inactivo
+                                        <input type="checkbox" id="statusSwitch" @(Model.Status == "Activo" ? "checked" : "")>
+                                        <span class="lever"></span>
+                                        Activo
+                                    </label>
+                                </div>
+                                
+                                <input type="hidden" asp-for="Status" id="StatusHidden" />
+                            </div>
+
+                        </div>
+                        
+                        <div class="center-align" style="margin-top:20px;">
+
+                            <button class="btn waves-effect waves-light green">
+                                💾 Guardar Cambios
+                            </button>
+
+                            <a asp-action="Index" class="btn grey">
+                                Cancelar
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="col s12 m5">
+            <div class="card z-depth-3">
+
+                <div class="card-image">
+                    <img id="previewImg"
+                         src="@(string.IsNullOrEmpty(Model.ImagenUrl) ? "/images/default.jpg" : Model.ImagenUrl)"
+                         style="height:250px; object-fit:cover;">
+                    <span class="card-title" id="previewTitle">@Model.Nombre</span>
+                </div>
+
+                <div class="card-content">
+                    <p><strong>📅</strong> <span id="previewFecha">@Model.Fecha.ToShortDateString()</span></p>
+                    <p><strong>📍</strong> <span id="previewUbicacion">@Model.Ubicacion</span></p>
+
+                    <p id="previewDesc" class="truncate">
+                        @Model.Descripcion
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Inicializar textarea Materialize
+        M.textareaAutoResize(document.getElementById('Descripcion'));
+
+        // Setear estado inicial
+        updateStatus();
+    });
+    
+    document.getElementById("statusSwitch").addEventListener("change", function () {
+        updateStatus();
+    });
+
+    function updateStatus() {
+        const isActive = document.getElementById("statusSwitch").checked;
+        document.getElementById("StatusHidden").value = isActive ? "Activo" : "Inactivo";
+    }
+    
+    document.getElementById("Nombre").addEventListener("input", function () {
+        document.getElementById("previewTitle").innerText = this.value;
+    });
+
+    document.getElementById("Ubicacion").addEventListener("input", function () {
+        document.getElementById("previewUbicacion").innerText = this.value;
+    });
+
+    document.getElementById("Descripcion").addEventListener("input", function () {
+        document.getElementById("previewDesc").innerText = this.value;
+    });
+
+    document.getElementById("ImagenUrl").addEventListener("input", previewImage);
+
+    function previewImage() {
+        const url = document.getElementById("ImagenUrl").value;
+        const img = document.getElementById("previewImg");
+
+        img.src = url || "/images/default.jpg";
+    }
+</script>
+}

@@ -1,0 +1,58 @@
+@model IEnumerable<MiProyectoMVC.Models.Events.Event>
+
+<div class="container">
+
+    <div class="row">
+        <h4 class="left">📊 Panel de Eventos</h4>
+
+        <a asp-action="Create" class="btn right gradient-btn">
+            ➕ Nuevo Evento
+        </a>
+    </div>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+        <div class="col s12 m6 l4">
+
+            <div class="card admin-card">
+
+                <div class="card-image">
+                    <img src="@(item.ImagenUrl ?? "/images/default.jpg")">
+                    <span class="card-title">@item.Nombre</span>
+                </div>
+
+                <div class="card-content">
+                    <p>📅 @item.Fecha.ToShortDateString()</p>
+                    <p>📍 @item.Ubicacion</p>
+                </div>
+
+                <div class="card-action center-align">
+
+                    <a asp-action="Edit" asp-route-id="@item.Id"
+                       class="btn-small blue">Editar</a>
+
+                    <a asp-action="Delete" asp-route-id="@item.Id"
+                       class="btn-small red">Eliminar</a>
+
+                </div>
+
+            </div>
+
+        </div>
+        }
+
+    </div>
+</div>
+
+<style>
+    .admin-card {
+        border-radius: 15px;
+        transition: 0.3s;
+    }
+
+    .admin-card:hover {
+        transform: scale(1.03);
+    }
+</style>
